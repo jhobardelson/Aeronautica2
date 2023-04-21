@@ -1,0 +1,42 @@
+group 'org.example'
+version '1.0-SNAPSHOT'
+tasks.withType(JavaCompile){ options.encoding = 'UTF-8' }
+
+repositories {
+    mavenCentral()
+}
+
+buildscript {
+    repositories {
+        maven {
+            mavenCentral()
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath("net.serenity-bdd:serenity-gradle-plugin:2.0.81")
+    }
+}
+
+apply plugin:'java'
+apply plugin:'idea'
+apply plugin:'eclipse'
+apply plugin:'net.serenity-bdd.aggregator'
+
+ext{
+    serenityCore = "2.4.34"
+    junit = "4.12"
+    cucumber6 = "2.4.34"
+    selenium = "3.14.0"
+}
+
+dependencies {
+
+    testImplementation "junit:junit:${junit}"
+    implementation "net.serenity-bdd:serenity-core:${serenityCore}"
+    implementation "net.serenity-bdd:serenity-cucumber6:${cucumber6}"
+    implementation "net.serenity-bdd:serenity-screenplay:${serenityCore}"
+    implementation "net.serenity-bdd:serenity-screenplay-webdriver:${serenityCore}"
+    implementation "org.seleniumhq.selenium:selenium-server:${selenium}"
+
+}
